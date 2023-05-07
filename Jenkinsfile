@@ -1,13 +1,21 @@
-pipeline {
-   agent any
+pipeline{
+    agent any
+    triggers {
+    github(
+        events: [githubBranchCreated()],
+        branches: [[pattern: 'release/*']],
+        skipFirst: false
+    )
+}
 
-   stages {
-       stage('WithEnv') {
-           steps {
-               withEnv(['TARGET1=one', 'TARGET2=two']) {
-                   sh 'cd simple;ls $TARGET1; ls $TARGET2'
-               }
-           }
-       }
-   }
+    stages{
+        stage("Show branch") {
+            steps{
+                script{
+                    echo "${env.GIT_BRANCH}"
+                    echo "${env.BRANCH_NAME}"
+                }
+            }
+        }
+    }
 }
