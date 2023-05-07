@@ -12,12 +12,8 @@ pipeline {
         }
         // Additional stages
     }
-    post {
-        always {
-            // Post-build actions
-        }
-    }
-}
+    
+
 
 def branchCreated = sh(returnStdout: true, script: 'git show-ref --heads') 
 if (branchCreated.contains('refs/heads/new-branch')) {
