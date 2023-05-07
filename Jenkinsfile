@@ -12,7 +12,7 @@ pipeline {
         }
         // Additional stages
     }
-    
+}
 
 
 def branchCreated = sh(returnStdout: true, script: 'git show-ref --heads') 
